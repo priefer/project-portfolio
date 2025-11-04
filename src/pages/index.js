@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { portfolioData } from '../data/portfolioData';
 import MatrixRain from '../components/MatrixRain';
 import DosWindow from '../components/DosWindow/DosWindow';
@@ -8,6 +9,7 @@ import Header from '../components/Header/Header';
 
 export default function Home({ portfolioData }) {
   const { profile, skills, projects, achievements } = portfolioData;
+  const [showEnter, setShowEnter] = useState(false);
 
   // Przygotowujemy dane do dwóch kolumn
   const skillCategories = Object.keys(skills);
@@ -15,6 +17,20 @@ export default function Home({ portfolioData }) {
   const rightColumnCategories = skillCategories.slice(2, 4); // np. database, tools
 
   const scrollOffset = { scrollMarginTop: '5rem' };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+          aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <>
@@ -38,7 +54,14 @@ export default function Home({ portfolioData }) {
             <div style={{ border: '1px solid var(--primary-color)', padding: '0.5rem', textAlign: 'center', marginBottom: '1rem' }}>
               WITAJ W NASZYM PORTFOLIO
             </div>
-            <Typewriter text="System uruchomiony... Ładowanie profilu użytkownika... [OK] Inicjalizacja zakończona pomyślnie. Przewiń w dół, aby zobaczyć portfolio." speed={40} />
+            <Typewriter lines={[
+              "System uruchomiony...",
+              "Ładowanie profilu użytkownika... [OK]",
+              "Ustanowienie bezpiecznego połączenia... [OK]",
+              "Pobieranie danych użytkownika... [OK]",
+              "Inicjalizacja zakończona pomyślnie.",
+              "Naciśnij ENTER, aby kontynuować."
+            ]} speed={40} initialDelay={1000} onComplete={() => setShowEnter(true)} />
           </DosWindow>
           </div>
 

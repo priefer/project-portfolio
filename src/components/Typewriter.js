@@ -1,36 +1,62 @@
 import React, { useState, useEffect } from 'react';
 
 // Ten custom hook można wydzielić do osobnego pliku, ale dla prostoty zostawiam go tutaj
-const useTypewriter = (text, speed = 50) => {
-  const [displayedText, setDisplayedText] = useState('');
+const useTypewriter = (lines, speed = 50, initialDelay = 1000) => {
+  const [completedLines, setCompletedLines] = useState([]);
+  const [currentPartial, setCurrentPartial] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    let i = 0;
-    // Resetuj tekst przy każdej zmianie tekstu wejściowego
-    setDisplayedText(''); 
-    
-    const typingInterval = setInterval(() => {
-      if (i < text.length) {
-        setDisplayedText(prev => prev + text.charAt(i));
-        i++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, speed);
+    setCompletedLines([]);
+    setCurrentPartial('');
+    setIsComplete(false);
 
-    // Czyszczenie interwału, gdy komponent jest odmontowywany
-    return () => clearInterval(typingInterval);
-  }, [text, speed]);
+    setTimeout(() => {
+      const typeLine = (lineIndex) => {
+        if (lineIndex >= lines.length) {
+          setIsComplete(true);
+          return;
+        }
 
-  return displayedText;
+        const line = lines[lineIndex];
+        let i = 0;
+        const interval = setInterval(() => {
+          if (i < line.length) {
+            setCurrentPartial(prev => prev + line.charAt(i));
+            i++;
+          } else {
+            clearInterval(interval);
+            setCompletedLines(prev => [...prev, line]);
+            setCurrentPartial('');
+            typeLine(lineIndex + 1);
+          }
+        }, speed);
+      };
+
+      typeLine(0);
+    }, initialDelay);
+
+    return () => {
+      // Cleanup if needed
+    };
+  }, [lines, speed, initialDelay]);  return { completedLines, currentPartial, isComplete };
 };
 
-const Typewriter = ({ text, speed }) => {
-  const displayedText = useTypewriter(text, speed);
+const Typewriter = ({ lines, speed, initialDelay, onComplete }) => {
+  const { completedLines, currentPartial, isComplete } = useTypewriter(lines, speed, initialDelay);
+
+  useEffect(() => {
+    if (isComplete && onComplete) {
+      onComplete();
+    }
+  }, [isComplete, onComplete]);
 
   return (
     <>
-      {displayedText}
+      {completedLines.map((line, index) => (
+        <div key={index} style={index === lines.length - 1 ? { marginTop: '2em' } : {}}>{line}</div>
+      ))}
+      {currentPartial && <div>{currentPartial}</div>}
       <span style={styles.cursor}></span>
     </>
   );
