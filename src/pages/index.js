@@ -65,7 +65,7 @@ export default function Home({ portfolioData }) {
           </DosWindow>
           </div>
 
-          <div id="about" style={{ ...scrollOffset, marginBottom: '18rem'}}>
+          <div id="about" style={{ ...scrollOffset, marginBottom: '38rem'}}>
             <DosWindow title="O.NAS">
               <h3 style={{ textAlign: 'center' }}>THREE GUYS ONE CODE</h3>
               <p style={{ textAlign: 'center', fontStyle: 'italic', opacity: 0.8 }}>
@@ -77,7 +77,7 @@ export default function Home({ portfolioData }) {
             </DosWindow>
           </div>
 
-          <div id="skills" style={{ ...scrollOffset, marginBottom: '14rem'}}>
+          <div id="skills" style={{ ...scrollOffset, marginBottom: '38rem'}}>
             <DosWindow title="SKILLS.DAT">
               {/* --- UKŁAD DWUKOLUMNOWY DLA UMIEJĘTNOŚCI --- */}
               <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
@@ -130,15 +130,29 @@ export default function Home({ portfolioData }) {
             </DosWindow>
           </div>
           
-          <div id="projects" style={{ ...scrollOffset, marginBottom: '24rem' }}>
-            <DosWindow title="PROJECTS.DIR">
-               {projects.map(project => (
-                  <div key={project.id} style={{borderBottom: '1px dashed var(--primary-color)', marginBottom: '1rem', paddingBottom: '1rem'}}>
-                      <h4>{project.name} - [{project.status}]</h4>
-                      <p>{project.description}</p>
-                      <p>Technologie: {project.technologies.join(', ')}</p>
-                  </div>
-               ))}
+          <div id="projects" style={{ ...scrollOffset, marginBottom: '30rem' }}>
+            {/* Pass the 'fixedWindow' class name here */}
+            <DosWindow
+              title="PROJECTS.DIR"
+              className="fixedWindow" 
+            >
+              {/* The content is now a direct child, which is key! */}
+              {projects.map(project => (
+                <div
+                  key={project.id}
+                  style={{
+                    borderBottom: '1px dashed var(--primary-color)',
+                    marginBottom: '1rem',
+                    paddingBottom: '1rem',
+                  }}
+                >
+                  <h4>
+                    {project.name} - [{project.status}]
+                  </h4>
+                  <p>{project.description}</p>
+                  <p>Technologie: {project.technologies.join(', ')}</p>
+                </div>
+              ))}
             </DosWindow>
           </div>
 

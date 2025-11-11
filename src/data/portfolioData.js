@@ -70,6 +70,38 @@ export const portfolioData = {
       demo: "https://news-portal.demo",
       status: "Completed",
       year: "2024"
+    },
+    {
+      id: 3,
+      name: "Strona z newsami 2 (Headless CMS)",
+      description: "Nowoczesny portal informacyjny oparty na architekturze Headless CMS, zapewniający błyskawiczne ładowanie i łatwe zarządzanie treścią przez redakcję.",
+      technologies: ["Next.js", "Strapi", "GraphQL", "TailwindCSS", "Vercel"],
+      features: [
+        "Statycznie generowane strony (SSG) dla maksymalnej wydajności",
+        "Dynamiczne kategorie i tagi",
+        "Zaawansowana wyszukiwarka po stronie klienta",
+        "Panel dla redaktorów do zarządzania treścią bez kodu"
+      ],
+      github: "https://github.com/neo-kowalski/news-portal",
+      demo: "https://news-portal.demo",
+      status: "Completed",
+      year: "2024"
+    },
+    {
+      id: 4,
+      name: "Strona z newsami 3 (Headless CMS)",
+      description: "Nowoczesny portal informacyjny oparty na architekturze Headless CMS, zapewniający błyskawiczne ładowanie i łatwe zarządzanie treścią przez redakcję.",
+      technologies: ["Next.js", "Strapi", "GraphQL", "TailwindCSS", "Vercel"],
+      features: [
+        "Statycznie generowane strony (SSG) dla maksymalnej wydajności",
+        "Dynamiczne kategorie i tagi",
+        "Zaawansowana wyszukiwarka po stronie klienta",
+        "Panel dla redaktorów do zarządzania treścią bez kodu"
+      ],
+      github: "https://github.com/neo-kowalski/news-portal",
+      demo: "https://news-portal.demo",
+      status: "Completed",
+      year: "2024"
     }
   ],
   

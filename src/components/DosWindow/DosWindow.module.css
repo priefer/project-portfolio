@@ -23,3 +23,35 @@
   padding: 1rem;
   min-height: 100px;
 }
+
+/* --- NEW: CONDITIONAL STYLES FOR THE SCROLLABLE VERSION --- */
+
+/* This rule targets the .window element ONLY when it ALSO has the .fixedWindow class */
+.window:global(.fixedWindow) {
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Important: prevent the whole window from showing scrollbars */
+}
+
+/* This targets the .content element ONLY when it's inside a .fixedWindow */
+.window:global(.fixedWindow) .content {
+  flex: 1; /* Allows the content area to grow and fill available space */
+  overflow-y: auto; /* Adds a scrollbar ONLY when content overflows */
+  min-height: 0; /* Important flexbox override to allow shrinking */
+}
+
+/* --- STYLES FOR THE SCROLLBAR (also scoped to the fixed window) --- */
+.window:global(.fixedWindow) .content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.window:global(.fixedWindow) .content::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-left: 1px solid var(--primary-color);
+}
+
+.window:global(.fixedWindow) .content::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border: 2px solid var(--bg-color);
+}
