@@ -35,3 +35,50 @@
   color: var(--bg-color);
   text-shadow: none;
 }
+
+/* ==================== RESPONSYWNOŚĆ MOBILE ==================== */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 0.4rem 0.5rem;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .prompt {
+    font-size: 1rem;
+  }
+
+  .nav {
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .navLink {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.3rem 0.4rem;
+    font-size: 1rem;
+  }
+
+  .prompt {
+    font-size: 0.85rem;
+  }
+
+  .nav {
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .navLink {
+    font-size: 0.8rem;
+    padding: 0.15rem 0.3rem;
+  }
+}
